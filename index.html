@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Casamento</title>
+    <link rel="stylesheet" href="mc.css">
+</head>
+<body>
+
+    <main class="cartao" id="cartao">
+        <div class="pedido">
+            <h1>Oi, minha princesa</h1>
+            <p>Quer casar comigo?</p>
+        </div>
+
+        <div class="gif">
+            <img src="cachorro.gif" alt="Cachorro feliz">
+        </div>
+
+        <div class="botoes">
+            <button class="sim" id="sim" type="button">SIM</button>
+            <button class="nao" id="nao" type="button">NÃO</button>
+        </div>
+    </main>
+
+    <section class="resposta" id="resposta" hidden>
+        <h2>˗ˋˏ♡ˎˊ˗ </h2>
+        <p>They say that the world was built for two</p>
+        <p>Only worth living if somebody is loving you</p>
+        <p>And, baby, now you do</p>
+        <img src="sempre.gif" alt="Anel">
+    </section>
+
+    <script>
+        const sim = document.getElementById('sim');
+        const nao = document.getElementById('nao');
+        const cartao = document.getElementById('cartao');
+        const resposta = document.getElementById('resposta');
+        let tamanho = 1;
+
+        // O "NÃO" foge e o "SIM" cresce a cada tentativa
+        function fugir() {
+            tamanho += 0.15;
+            sim.style.transform = `scale(${tamanho})`;
+
+            const maxX = window.innerWidth - nao.offsetWidth - 20;
+            const maxY = window.innerHeight - nao.offsetHeight - 20;
+            nao.style.position = 'fixed';
+            nao.style.left = Math.max(10, Math.random() * maxX) + 'px';
+            nao.style.top = Math.max(10, Math.random() * maxY) + 'px';
+        }
+
+        nao.addEventListener('mouseenter', fugir);
+        nao.addEventListener('touchstart', (e) => { e.preventDefault(); fugir(); });
+        nao.addEventListener('click', fugir);
+
+        sim.addEventListener('click', () => {
+            cartao.hidden = true;
+            resposta.hidden = false;
+            document.body.classList.add('festa');
+        });
+
+    </script>
+</body>
+</html>
